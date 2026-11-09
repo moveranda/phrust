@@ -1,6 +1,8 @@
 [workspace]
 resolver = "3"
-members = ["crates/*", "examples"]
+members = [
+    "crates/phrust_linux"
+]
 
 [workspace.package]
 version = "0.1.0"
@@ -12,6 +14,12 @@ repository = "https://github.com/moveranda/phrust"
 
 [workspace.dependencies]
 
+#
+# Workspace member crates
+#
+
+phrust_linux = { path = "crates/phrust_linux", default-features = false }
+
 [workspace.lints.rust]
 missing_docs = "warn"
 unsafe_code = "deny"
@@ -19,7 +27,6 @@ unsafe_op_in_unsafe_fn = "deny"
 unused_qualifications = "warn"
 
 [workspace.lints.clippy]
-# Readability-focused lints, in the spirit of Bevy's workspace lints.
 doc_markdown = "warn"
 manual_let_else = "warn"
 match_same_arms = "warn"
