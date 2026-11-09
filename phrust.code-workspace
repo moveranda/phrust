@@ -14,13 +14,25 @@
         }
     ],
     "settings": {
-        "rust-analyzer.testExplorer": true
+        "rust-analyzer.testExplorer": true,
+        "editor.formatOnSave": true,
+        "[json]": {
+            "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[jsonc]": {
+            "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[yaml]": {
+            "editor.defaultFormatter": "redhat.vscode-yaml"
+        }
     },
     "extensions": {
         "recommendations": [
             "rust-lang.rust-analyzer",
             "tamasfe.even-better-toml",
-            "astro-build.astro-vscode"
+            "astro-build.astro-vscode",
+            "redhat.vscode-yaml",
+            "github.vscode-github-actions"
         ]
     }
 }
