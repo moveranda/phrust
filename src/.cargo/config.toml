@@ -1,0 +1,13 @@
+# Project tools (nextest, typos, cargo-deny, ...) are pinned in
+# `[workspace.metadata.bin]` in Cargo.toml and run through `cargo-run-bin`,
+# so everyone uses the same versions as CI. Install once with:
+#
+#     cargo install cargo-run-bin --version 1.7.5 --locked
+#     cargo bin --install
+
+[alias]
+nextest = ["bin", "cargo-nextest"]
+typos = ["bin", "typos-cli"]
+deny = ["bin", "cargo-deny"]
+machete = ["bin", "cargo-machete"]
+

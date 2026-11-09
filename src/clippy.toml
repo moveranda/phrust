@@ -1,0 +1,19 @@
+# https://doc.rust-lang.org/clippy/lint_configuration.html
+
+# Identifiers that `clippy::doc_markdown` should not ask to wrap in backticks.
+doc-valid-idents = [
+    "..",
+    "WebGPU",
+    "WebGL",
+    "WGSL",
+    "OpenType",
+    "TrueType",
+]
+
+# Keep functions small enough to read in one sitting.
+too-many-lines-threshold = 120
+too-many-arguments-threshold = 8
+
+# Allow `unwrap`/`expect` in tests, where a panic is the failure report.
+allow-unwrap-in-tests = true
+allow-expect-in-tests = true

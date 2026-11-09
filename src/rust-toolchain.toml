@@ -1,0 +1,9 @@
+[toolchain]
+# Pinned to the latest stable release. Bump deliberately, together with
+# `workspace.package.rust-version` in Cargo.toml.
+# https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file
+channel = "1.99.1"
+profile = "default"
+components = ["clippy", "rustfmt"]
+# `wasm32-unknown-unknown` powers the browser build (WebGPU in the browser).
+targets = ["wasm32-unknown-unknown"]

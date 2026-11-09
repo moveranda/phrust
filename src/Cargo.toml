@@ -1,0 +1,68 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "examples"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99.1"
+license = "Apache-2.0"
+authors = ["Victor Pogor"]
+repository = "https://github.com/moveranda/phrust"
+
+[workspace.dependencies]
+
+[workspace.lints.rust]
+missing_docs = "warn"
+unsafe_code = "deny"
+unsafe_op_in_unsafe_fn = "deny"
+unused_qualifications = "warn"
+
+[workspace.lints.clippy]
+# Readability-focused lints, in the spirit of Bevy's workspace lints.
+doc_markdown = "warn"
+manual_let_else = "warn"
+match_same_arms = "warn"
+redundant_closure_for_method_calls = "warn"
+redundant_else = "warn"
+semicolon_if_nothing_returned = "warn"
+std_instead_of_core = "warn"
+too_many_lines = "warn"
+undocumented_unsafe_blocks = "warn"
+unwrap_or_default = "warn"
+ptr_as_ptr = "warn"
+ptr_cast_constness = "warn"
+ref_as_ptr = "warn"
+
+# ---------------------------------------------------------------------------
+# Profiles
+# ---------------------------------------------------------------------------
+
+# Optimise dependencies even in debug builds: GPU setup is
+# noticeably slow unoptimised, while our own code stays fast to recompile.
+[profile.dev.package."*"]
+opt-level = 2
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
+
+# Smaller binaries for the browser.
+[profile.web-release]
+inherits = "release"
+opt-level = "s"
+panic = "abort"
+# Keep custom sections needed by wasm-bindgen.
+strip = false
+
+# ---------------------------------------------------------------------------
+# Project tools, run through cargo-run-bin (see .cargo/config.toml).
+# ---------------------------------------------------------------------------
+
+[workspace.metadata.bin]
+cargo-deny = { version = "0.20.2", locked = true }
+cargo-machete = { version = "0.9.2", locked = true }
+cargo-mutants = { version = "27.1.0", locked = true }
+cargo-nextest = { version = "0.9.151", locked = true }
+typos-cli = { version = "1.52.0", bins = ["typos"], locked = true }
