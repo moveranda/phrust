@@ -1,0 +1,45 @@
+name: OpenSSF Scorecard
+
+# Rates the repository's supply-chain security (pinned actions, token
+# permissions, branch protection, signed releases, ...) and reports findings
+# under Security -> Code scanning.
+# https://github.com/ossf/scorecard-action
+on:
+  push:
+    branches: [main]
+  branch_protection_rule:
+  schedule:
+    - cron: "29 4 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      # Upload results to code scanning.
+      security-events: write
+      # Publish results to the public Scorecard API and enable the badge.
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      # TODO: pin to a commit SHA like the other actions.
+      - name: Run analysis
+        uses: ossf/scorecard-action@v2.4.0
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+
+      - name: Upload to code scanning
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: results.sarif

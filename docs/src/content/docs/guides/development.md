@@ -59,6 +59,9 @@ cargo build --profile web-release --target wasm32-unknown-unknown
 ### Security scanning and dependency updates
 
 - `.github/workflows/codeql.yml` runs CodeQL on pull requests, pushes to `main` and weekly, for the Rust code, the docs site and the workflows. Findings appear under **Security → Code scanning**.
+- `.github/workflows/osv-scanner.yml` checks `src/Cargo.lock` and `docs/pnpm-lock.yaml` against [osv.dev](https://osv.dev). On pull requests it fails only on vulnerabilities the change introduces.
+- `.github/workflows/scorecard.yml` runs [OpenSSF Scorecard](https://scorecard.dev) weekly and on pushes to `main`, rating the repository's supply-chain practices.
+- `.github/workflows/sonarqube.yml` runs [SonarQube Cloud](https://sonarcloud.io) on pull requests and `main`, with the Clippy report imported. Settings live in `sonar-project.properties`, and it needs the `SONAR_TOKEN` repository secret.
 - `.github/dependabot.yml` checks Cargo crates, the docs' npm packages and GitHub Actions every Monday. All updates, including major versions and security fixes, are grouped into one pull request per ecosystem.
 
 ## Releases
@@ -66,7 +69,7 @@ cargo build --profile web-release --target wasm32-unknown-unknown
 `.github/workflows/release.yml` runs when a `v*` tag is pushed:
 
 1. Builds the release binary on Ubuntu 24.04 for x86_64 and aarch64, and packages it as a tarball, DEB, RPM, AppImage and Flatpak.
-2. Publishes a GitHub Release with those packages, a `SHA256SUMS` file and build provenance attestations. A tag with a suffix, such as `v0.2.0-rc.1`, becomes a pre-release.
+2. Publishes a GitHub Release with those packages, an SPDX SBOM, a `SHA256SUMS` file and build provenance attestations. A tag with a suffix, such as `v0.2.0-rc.1`, becomes a pre-release.
 3. Builds this site and deploys it to GitHub Pages at `https://moveranda.github.io/phrust/`, once the release is out.
 
 ```sh

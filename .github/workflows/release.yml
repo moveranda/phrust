@@ -1,6 +1,6 @@
 name: Release
 
-# Push a version tag to publish the Linux packages as a GitHub Release and
+# Push a version tag to publish the Linux packages and an SBOM as a GitHub Release and
 # deploy the documentation site to GitHub Pages:
 #   git tag v0.1.0 && git push origin v0.1.0
 # A manual run builds the packages and the site without publishing anything.
@@ -89,6 +89,24 @@ jobs:
           pattern: linux-*
           merge-multiple: true
           path: release
+
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+          path: source
+
+      # Software bill of materials for the Rust dependencies that go into the
+      # packages, attached to the release next to the packages.
+      # TODO: pin to a commit SHA like the other actions.
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: source/src
+          format: spdx-json
+          output-file: release/phrust-${{ github.ref_name }}.spdx.json
+          upload-artifact: false
+          upload-release-assets: false
 
       - name: Generate checksums
         working-directory: release

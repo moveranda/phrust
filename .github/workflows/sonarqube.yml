@@ -1,0 +1,50 @@
+name: SonarQube Cloud
+
+# Code quality and security analysis on SonarQube Cloud.
+# Settings live in sonar-project.properties at the repository root.
+# Needs the SONAR_TOKEN repository secret (Settings -> Secrets and variables
+# -> Actions). Pull requests from forks cannot read it, so they are skipped.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions: {}
+
+jobs:
+  analyze:
+    name: Analyze
+    if: github.event.pull_request.head.repo.fork != true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          # Full history lets Sonar attribute issues to commits and detect new code.
+          fetch-depth: 0
+          persist-credentials: false
+
+      # rustup reads src/rust-toolchain.toml and installs the pinned toolchain.
+      - name: Install pinned Rust toolchain
+        working-directory: src
+        run: rustup show active-toolchain
+
+      # Sonar's Rust analysis imports Clippy findings from a JSON report.
+      - name: Run Clippy for Sonar
+        working-directory: src
+        run: cargo clippy --workspace --all-targets --all-features --locked --message-format=json > clippy-report.json
+
+      # TODO: pin to a commit SHA like the other actions.
+      - name: SonarQube Cloud scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
