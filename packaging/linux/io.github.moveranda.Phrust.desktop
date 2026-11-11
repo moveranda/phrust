@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Phrust
+Comment=Physics engine demo written in Rust
+Exec=phrust
+Icon=io.github.moveranda.Phrust
+Terminal=false
+Categories=Science;

@@ -1,0 +1,44 @@
+name: OSV Scanner
+
+# Checks every lockfile in the repository (src/Cargo.lock,
+# docs/pnpm-lock.yaml) against https://osv.dev and reports known
+# vulnerabilities under Security -> Code scanning. Pull requests only fail on
+# vulnerabilities they introduce.
+# https://google.github.io/osv-scanner/github-action/
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+  schedule:
+    - cron: "41 4 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  scan:
+    name: Scan dependencies
+    if: github.event_name != 'pull_request' && github.event_name != 'merge_group'
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@98b584ee2ed2da3935ccce10e06739d54cdcd20b # v2.0.0
+    with:
+      scan-args: |-
+        --recursive
+        ./
+
+  scan-pr:
+    name: Scan dependency changes
+    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@98b584ee2ed2da3935ccce10e06739d54cdcd20b # v2.0.0
+    with:
+      scan-args: |-
+        --recursive
+        ./

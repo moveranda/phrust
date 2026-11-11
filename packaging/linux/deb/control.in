@@ -1,0 +1,12 @@
+Package: @APP_NAME@
+Version: @VERSION@-1
+Architecture: @DEB_ARCH@
+Maintainer: Phrust contributors <noreply@github.com>
+Section: science
+Priority: optional
+Homepage: https://github.com/moveranda/phrust
+# glibc 2.39 is what the Ubuntu 24.04 build runners ship. libwayland-client
+# and the Vulkan loader are loaded at runtime (dlopen), so list them here.
+Depends: libc6 (>= 2.39), libgcc-s1, libwayland-client0, libvulkan1
+Description: @APP_SUMMARY@
+ An experimental game and physics engine written in Rust.

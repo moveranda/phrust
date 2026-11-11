@@ -1,0 +1,56 @@
+# Dependabot version updates.
+# https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+#
+# Every update, major ones and security fixes included, is grouped into one
+# pull request per ecosystem, so each weekly run opens at most three PRs
+# instead of one per package.
+version: 2
+
+updates:
+  # Rust crates in the Cargo workspace.
+  - package-ecosystem: cargo
+    directory: /src
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      cargo:
+        patterns: ["*"]
+      cargo-security:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  # Documentation site (pnpm uses the npm ecosystem).
+  - package-ecosystem: npm
+    directory: /docs
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(docs)"
+    groups:
+      docs:
+        patterns: ["*"]
+      docs-security:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  # Actions used by the workflows. Dependabot keeps the pinned commit SHAs and
+  # their version comments in step.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "chore(ci)"
+    groups:
+      actions:
+        patterns: ["*"]
+      actions-security:
+        applies-to: security-updates
+        patterns: ["*"]

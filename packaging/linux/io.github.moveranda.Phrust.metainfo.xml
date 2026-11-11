@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.moveranda.Phrust</id>
+  <name>Phrust</name>
+  <summary>Explore a physics engine written in Rust</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT OR Apache-2.0</project_license>
+  <developer id="io.github.moveranda">
+    <name>Victor Pogor</name>
+  </developer>
+  <description>
+    <p>Phrust is an experimental game and physics engine. This build opens a window and renders the current demo scene.</p>
+  </description>
+  <launchable type="desktop-id">io.github.moveranda.Phrust.desktop</launchable>
+  <url type="homepage">https://github.com/moveranda/phrust</url>
+  <url type="bugtracker">https://github.com/moveranda/phrust/issues</url>
+  <provides>
+    <binary>phrust</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>

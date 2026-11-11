@@ -1,0 +1,24 @@
+[package]
+name = "phrust_linux"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+wayland-backend = { workspace = true, features = [
+    "client_system",
+    "dlopen",
+], optional = true }
+
+wayland-client = { workspace = true, optional = true }
+
+wayland-protocols = { workspace = true, features = [
+    "client",
+    "unstable",
+], optional = true }
+
+[lints]
+workspace = true

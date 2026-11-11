@@ -1,0 +1,4 @@
+#!/bin/sh
+# Entry point of the AppImage: run the bundled binary from wherever it is mounted.
+here="$(dirname "$(readlink -f "$0")")"
+exec "$here/usr/bin/@APP_NAME@" "$@"

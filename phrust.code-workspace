@@ -1,0 +1,38 @@
+{
+    "folders": [
+        {
+            "name": "docs",
+            "path": "docs"
+        },
+        {
+            "name": "src",
+            "path": "src"
+        },
+        {
+            "name": "root",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "rust-analyzer.testExplorer": true,
+        "editor.formatOnSave": true,
+        "[json]": {
+            "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[jsonc]": {
+            "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[yaml]": {
+            "editor.defaultFormatter": "redhat.vscode-yaml"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "rust-lang.rust-analyzer",
+            "tamasfe.even-better-toml",
+            "astro-build.astro-vscode",
+            "redhat.vscode-yaml",
+            "github.vscode-github-actions"
+        ]
+    }
+}

@@ -1,0 +1,35 @@
+# cargo-deny configuration: licences, advisories, bans and sources.
+# https://embarkstudios.github.io/cargo-deny/
+# Run with `cargo deny check` from `src/`.
+
+[graph]
+all-features = true
+
+[advisories]
+version = 2
+yanked = "deny"
+ignore = []
+
+[licenses]
+version = 2
+# Permissive licences that are compatible with Apache-2.0 distribution.
+allow = [
+    "Apache-2.0",
+    "ISC",
+    "MIT",
+    "Unicode-3.0",
+]
+confidence-threshold = 0.9
+
+[licenses.private]
+# Our own unpublished crates.
+ignore = true
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+allow-wildcard-paths = true
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
