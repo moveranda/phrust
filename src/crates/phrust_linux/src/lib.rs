@@ -17,7 +17,8 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        // Distinct operands: 2 + 2 == 2 * 2 would let a `+` -> `*` mutant survive.
+        assert_eq!(add(2, 3), 5);
+        assert_eq!(add(0, 7), 7);
     }
 }
