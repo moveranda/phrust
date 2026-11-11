@@ -98,9 +98,8 @@ jobs:
 
       # Software bill of materials for the Rust dependencies that go into the
       # packages, attached to the release next to the packages.
-      # TODO: pin to a commit SHA like the other actions.
       - name: Generate SBOM
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0
         with:
           path: source/src
           format: spdx-json

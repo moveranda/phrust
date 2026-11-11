@@ -38,16 +38,14 @@ jobs:
         with:
           persist-credentials: false
 
-      # TODO: pin to a commit SHA like the other actions; Dependabot keeps it
-      # up to date once pinned.
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@5895b2c9be147bc7f1c75ce72c5cb577febb1907 # v4
         with:
           languages: ${{ matrix.language }}
           build-mode: none
           queries: security-and-quality
 
       - name: Analyze
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@5895b2c9be147bc7f1c75ce72c5cb577febb1907 # v4
         with:
           category: /language:${{ matrix.language }}

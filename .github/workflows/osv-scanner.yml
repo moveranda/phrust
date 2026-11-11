@@ -24,9 +24,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    # TODO: pin to a commit SHA like the other actions. Reusable workflows need an
-    # exact tag (there is no floating v2); Dependabot bumps it.
-    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.0.0
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@98b584ee2ed2da3935ccce10e06739d54cdcd20b # v2.0.0
     with:
       scan-args: |-
         --recursive
@@ -39,7 +37,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@v2.0.0
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@98b584ee2ed2da3935ccce10e06739d54cdcd20b # v2.0.0
     with:
       scan-args: |-
         --recursive

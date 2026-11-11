@@ -54,8 +54,7 @@ jobs:
         working-directory: src
         run: cargo llvm-cov --workspace --all-features --locked --lcov --output-path lcov.info
 
-      # TODO: pin to a commit SHA like the other actions.
       - name: SonarQube Cloud scan
-        uses: SonarSource/sonarqube-scan-action@v6
+        uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
