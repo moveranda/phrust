@@ -42,6 +42,21 @@ jobs:
         working-directory: src
         run: rustup show active-toolchain
 
+      # A tag run can only restore caches saved on main (or by an earlier attempt
+      # of the same run), so fall back to the CI build cache for the crate downloads.
+      - name: Cache Cargo data
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            src/target/
+          key: release-${{ matrix.arch }}-${{ hashFiles('src/Cargo.lock', 'src/rust-toolchain.toml') }}
+          restore-keys: |
+            release-${{ matrix.arch }}-
+            build-${{ matrix.arch }}-unknown-linux-gnu-
+
       - name: Build release binary
         working-directory: src
         run: |

@@ -16,6 +16,11 @@ concurrency:
 
 permissions: {}
 
+env:
+  CARGO_INCREMENTAL: 0
+  CARGO_RUN_BIN_VERSION: 1.7.5
+  CARGO_TERM_COLOR: always
+
 jobs:
   analyze:
     name: Analyze
@@ -38,6 +43,25 @@ jobs:
         working-directory: src
         run: rustup show active-toolchain
 
+      - name: Cache Cargo data
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            src/target/
+          key: sonar-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('src/Cargo.lock', 'src/rust-toolchain.toml') }}
+          restore-keys: sonar-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Cache project tools
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: |
+            src/.bin/
+            ~/.cargo/bin/cargo-bin
+          key: tools-${{ env.CARGO_RUN_BIN_VERSION }}-sonar-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('src/Cargo.toml', 'src/rust-toolchain.toml') }}
+
       # Sonar's Rust analysis imports Clippy findings from a JSON report.
       - name: Run Clippy for Sonar
         working-directory: src
@@ -46,7 +70,7 @@ jobs:
       - name: Install cargo-llvm-cov
         working-directory: src
         run: |
-          cargo install cargo-run-bin --version 1.7.5 --locked
+          command -v cargo-bin || cargo install cargo-run-bin --version "${{ env.CARGO_RUN_BIN_VERSION }}" --locked
           cargo bin cargo-llvm-cov --version
 
       # LCOV coverage of the workspace tests, read by Sonar for the coverage gate.

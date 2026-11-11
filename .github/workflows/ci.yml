@@ -57,12 +57,14 @@ jobs:
       - name: Cache project tools
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
-          path: src/.bin/
-          key: tools-quality-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('src/Cargo.toml', 'src/rust-toolchain.toml') }}
+          path: |
+            src/.bin/
+            ~/.cargo/bin/cargo-bin
+          key: tools-${{ env.CARGO_RUN_BIN_VERSION }}-quality-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('src/Cargo.toml', 'src/rust-toolchain.toml') }}
 
       - name: Install project tools
         run: |
-          cargo install cargo-run-bin --version "${{ env.CARGO_RUN_BIN_VERSION }}" --locked
+          command -v cargo-bin || cargo install cargo-run-bin --version "${{ env.CARGO_RUN_BIN_VERSION }}" --locked
           cargo bin cargo-deny --version
           cargo bin cargo-machete --version
           cargo bin typos-cli --version
@@ -135,12 +137,14 @@ jobs:
       - name: Cache project tools
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
-          path: src/.bin/
-          key: tools-test-${{ matrix.target }}-${{ hashFiles('src/Cargo.toml', 'src/rust-toolchain.toml') }}
+          path: |
+            src/.bin/
+            ~/.cargo/bin/cargo-bin
+          key: tools-${{ env.CARGO_RUN_BIN_VERSION }}-test-${{ matrix.target }}-${{ hashFiles('src/Cargo.toml', 'src/rust-toolchain.toml') }}
 
       - name: Install nextest
         run: |
-          cargo install cargo-run-bin --version "${{ env.CARGO_RUN_BIN_VERSION }}" --locked
+          command -v cargo-bin || cargo install cargo-run-bin --version "${{ env.CARGO_RUN_BIN_VERSION }}" --locked
           cargo bin cargo-nextest --version
 
       - name: Build workspace
@@ -241,12 +245,14 @@ jobs:
       - name: Cache project tools
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
-          path: src/.bin/
-          key: tools-mutations-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('src/Cargo.toml', 'src/rust-toolchain.toml') }}
+          path: |
+            src/.bin/
+            ~/.cargo/bin/cargo-bin
+          key: tools-${{ env.CARGO_RUN_BIN_VERSION }}-mutations-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('src/Cargo.toml', 'src/rust-toolchain.toml') }}
 
       - name: Install mutation testing tool
         run: |
-          cargo install cargo-run-bin --version "${{ env.CARGO_RUN_BIN_VERSION }}" --locked
+          command -v cargo-bin || cargo install cargo-run-bin --version "${{ env.CARGO_RUN_BIN_VERSION }}" --locked
           cargo mutants --version
 
       - name: Run mutation tests
