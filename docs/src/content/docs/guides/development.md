@@ -32,7 +32,7 @@ Lints are set once in `[workspace.lints]` in `src/Cargo.toml`, and each crate op
 
 ## Dependencies
 
-`src/deny.toml` allows only crates licensed under MIT, Apache-2.0 or Unicode-3.0 (used by `unicode-ident`), denies yanked crates, wildcard versions and unknown registries or git sources, and warns on duplicate versions.
+`src/deny.toml` allows only crates licensed under MIT, Apache-2.0, ISC (used by `libloading`) or Unicode-3.0 (used by `unicode-ident`), denies yanked crates, wildcard versions and unknown registries or git sources, and warns on duplicate versions.
 
 ## Build profiles
 
