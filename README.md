@@ -1,5 +1,22 @@
 # Phrust
 
+[![CI](https://github.com/moveranda/phrust/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/moveranda/phrust/actions/workflows/ci.yml)
+[![Release](https://github.com/moveranda/phrust/actions/workflows/release.yml/badge.svg)](https://github.com/moveranda/phrust/actions/workflows/release.yml)
+[![CodeQL](https://github.com/moveranda/phrust/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/moveranda/phrust/actions/workflows/codeql.yml)
+[![OSV Scanner](https://github.com/moveranda/phrust/actions/workflows/osv-scanner.yml/badge.svg?branch=main)](https://github.com/moveranda/phrust/actions/workflows/osv-scanner.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/moveranda/phrust/badge)](https://scorecard.dev/viewer/?uri=github.com/moveranda/phrust)
+
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=moveranda_phrust&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=moveranda_phrust)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=moveranda_phrust&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=moveranda_phrust)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=moveranda_phrust&metric=bugs)](https://sonarcloud.io/summary/new_code?id=moveranda_phrust)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=moveranda_phrust&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=moveranda_phrust)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=moveranda_phrust&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=moveranda_phrust)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=moveranda_phrust&metric=coverage)](https://sonarcloud.io/summary/new_code?id=moveranda_phrust)
+
+[![Docs](https://img.shields.io/badge/docs-moveranda.github.io%2Fphrust-blue)](https://moveranda.github.io/phrust/)
+[![Rust](https://img.shields.io/badge/rust-1.99.1-orange?logo=rust)](src/rust-toolchain.toml)
+[![License: MIT OR Apache-2.0](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
+
 An experimental game and physics engine written in Rust, rendered with WebGPU.
 
 Phrust is a learning project: the physics follows *University Physics with

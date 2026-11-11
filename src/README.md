@@ -43,6 +43,7 @@ cargo deny check      # licences, advisories, sources
 cargo typos ..        # spelling, whole repository
 cargo machete         # unused dependencies
 cargo mutants         # mutation testing
+cargo llvm-cov        # test coverage
 ```
 
 The aliases are defined in `.cargo/config.toml`.

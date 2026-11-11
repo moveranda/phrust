@@ -28,3 +28,4 @@ rustc-ice-*.txt
 
 # Clippy report for SonarQube Cloud
 clippy-report.json
+lcov.info

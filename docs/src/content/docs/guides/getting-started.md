@@ -5,7 +5,7 @@ description: Set up a development environment and build Phrust.
 
 ## Prerequisites
 
-- [rustup](https://rustup.rs/). The toolchain is pinned in `src/rust-toolchain.toml` (Rust 1.99.1 with `clippy`, `rustfmt` and the `wasm32-unknown-unknown` target), so rustup installs the right version for you.
+- [rustup](https://rustup.rs/). The toolchain is pinned in `src/rust-toolchain.toml` (Rust 1.99.1 with `clippy`, `rustfmt`, `llvm-tools` and the `wasm32-unknown-unknown` target), so rustup installs the right version for you.
 - On Linux: the Wayland client development libraries (for example `libwayland-dev` on Debian and Ubuntu, `wayland-devel` on Fedora), plus `pkg-config`.
 - For the docs site: Node.js and [pnpm](https://pnpm.io/).
 

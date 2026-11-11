@@ -12,6 +12,7 @@ cargo nextest run                # tests
 cargo deny check                 # licences, advisories, banned sources
 cargo typos                      # spelling
 cargo machete                    # unused dependencies
+cargo llvm-cov                   # test coverage
 ```
 
 `cargo nextest`, `cargo deny`, `cargo typos`, `cargo machete` and `cargo mutants` are aliases defined in `src/.cargo/config.toml`. They run the pinned versions through `cargo-run-bin`. [`cargo-mutants`](https://mutants.rs/) is pinned as well, for mutation testing (`cargo mutants`).

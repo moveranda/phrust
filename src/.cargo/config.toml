@@ -10,5 +10,6 @@ nextest = ["bin", "cargo-nextest"]
 typos = ["bin", "typos-cli"]
 deny = ["bin", "cargo-deny"]
 machete = ["bin", "cargo-machete"]
+llvm-cov = ["bin", "cargo-llvm-cov"]
 mutants = ["bin", "cargo-mutants"]
 

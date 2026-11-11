@@ -4,6 +4,6 @@
 # https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file
 channel = "1.99.1"
 profile = "default"
-components = ["clippy", "rustfmt"]
+components = ["clippy", "rustfmt", "llvm-tools"]
 # `wasm32-unknown-unknown` powers the browser build (WebGPU in the browser).
 targets = ["wasm32-unknown-unknown"]
