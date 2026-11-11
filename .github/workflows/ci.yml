@@ -152,6 +152,31 @@ jobs:
       - name: Run doc tests
         run: cargo test --workspace --doc --locked --target ${{ matrix.target }}
 
+  packaging:
+    name: Check Linux packaging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Install validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes desktop-file-utils appstream shellcheck
+
+      - name: Check packaging script
+        run: shellcheck --external-sources packaging/linux/package.sh
+
+      - name: Validate desktop entry and metainfo
+        run: |
+          desktop-file-validate packaging/linux/*.desktop
+          appstreamcli validate --no-net packaging/linux/*.metainfo.xml
+
   docs:
     name: Build documentation site
     runs-on: ubuntu-24.04

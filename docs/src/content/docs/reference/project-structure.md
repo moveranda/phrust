@@ -15,6 +15,8 @@ phrust/
 │   ├── rustfmt.toml
 │   └── crates/
 │       └── phrust_linux/    # Linux (Wayland) platform layer
+├── packaging/linux/         # Linux release packages (see its README)
+├── .github/workflows/       # CI and release workflows
 ├── phrust.code-workspace    # VS Code multi-root workspace
 ├── LICENSE-APACHE
 └── LICENSE-MIT

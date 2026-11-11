@@ -1,0 +1,20 @@
+# flatpak-builder manifest. It repackages the prebuilt tree staged by
+# package.sh instead of compiling inside the sandbox.
+id: @APP_ID@
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: @APP_NAME@
+finish-args:
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  - --device=dri
+modules:
+  - name: @APP_NAME@
+    buildsystem: simple
+    build-commands:
+      - cp -a usr/. /app/
+    sources:
+      - type: dir
+        path: @STAGE@

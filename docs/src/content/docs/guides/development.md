@@ -58,10 +58,22 @@ cargo build --profile web-release --target wasm32-unknown-unknown
 
 ## Releases
 
-`.github/workflows/release.yml` runs when a `v*` tag is pushed. For now it only builds this site and deploys it to GitHub Pages at `https://moveranda.github.io/phrust/`. Engine binaries are not released yet.
+`.github/workflows/release.yml` runs when a `v*` tag is pushed:
+
+1. Builds the release binary on Ubuntu 24.04 for x86_64 and aarch64, and packages it as a tarball, DEB, RPM, AppImage and Flatpak.
+2. Publishes a GitHub Release with those packages, a `SHA256SUMS` file and build provenance attestations. A tag with a suffix, such as `v0.2.0-rc.1`, becomes a pre-release.
+3. Builds this site and deploys it to GitHub Pages at `https://moveranda.github.io/phrust/`, once the release is out.
 
 ```sh
 git tag v0.1.0 && git push origin v0.1.0
 ```
 
+Running the workflow by hand builds the packages and the site, but publishes nothing.
+
 GitHub Pages must be set to deploy from **GitHub Actions** in the repository settings.
+
+## Linux packaging
+
+Everything about the Linux packages lives in `packaging/linux/`. `app.env` names what is packaged (the app id, the `phrust` command and the Cargo package whose binary ships), and `package.sh` builds every format from one staged tree. Each format has a small template next to it: `deb/control.in`, `rpm/package.spec.in`, `flatpak/manifest.yml.in` and `appimage/`. See `packaging/linux/README.md` for common changes and how to build the packages locally.
+
+CI checks the packaging script with ShellCheck and validates the desktop entry and AppStream metainfo on every pull request.

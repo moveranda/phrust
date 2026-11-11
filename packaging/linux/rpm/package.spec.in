@@ -1,0 +1,25 @@
+# Repackages a prebuilt tree; nothing is compiled here.
+Name:      @APP_NAME@
+Version:   @VERSION@
+Release:   1
+Summary:   @APP_SUMMARY@
+License:   MIT OR Apache-2.0
+URL:       https://github.com/moveranda/phrust
+# glibc and libgcc are detected automatically from the binary. These two are
+# loaded at runtime (dlopen), so rpm cannot see them.
+Requires:  libwayland-client
+Requires:  vulkan-loader
+
+%description
+An experimental game and physics engine written in Rust.
+
+%install
+cp -a @STAGE@/. %{buildroot}/
+
+%files
+/usr/bin/@APP_NAME@
+/usr/share/applications/@APP_ID@.desktop
+/usr/share/icons/hicolor/scalable/apps/@APP_ID@.svg
+/usr/share/metainfo/@APP_ID@.metainfo.xml
+%license /usr/share/licenses/@APP_NAME@/LICENSE-MIT
+%license /usr/share/licenses/@APP_NAME@/LICENSE-APACHE
