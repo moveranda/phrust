@@ -14,7 +14,7 @@ cargo typos                      # spelling
 cargo machete                    # unused dependencies
 ```
 
-`cargo nextest`, `cargo deny`, `cargo typos` and `cargo machete` are aliases defined in `src/.cargo/config.toml`. They run the pinned versions through `cargo-run-bin`. [`cargo-mutants`](https://mutants.rs/) is pinned as well, for mutation testing (`cargo bin cargo-mutants`).
+`cargo nextest`, `cargo deny`, `cargo typos`, `cargo machete` and `cargo mutants` are aliases defined in `src/.cargo/config.toml`. They run the pinned versions through `cargo-run-bin`. [`cargo-mutants`](https://mutants.rs/) is pinned as well, for mutation testing (`cargo mutants`).
 
 ## Lints
 
@@ -31,7 +31,7 @@ Lints are set once in `[workspace.lints]` in `src/Cargo.toml`, and each crate op
 
 ## Dependencies
 
-`src/deny.toml` allows only crates licensed under MIT or Apache-2.0, denies yanked crates, wildcard versions and unknown registries or git sources, and warns on duplicate versions.
+`src/deny.toml` allows only crates licensed under MIT, Apache-2.0 or Unicode-3.0 (used by `unicode-ident`), denies yanked crates, wildcard versions and unknown registries or git sources, and warns on duplicate versions.
 
 ## Build profiles
 
@@ -46,3 +46,22 @@ Build for the browser with:
 ```sh
 cargo build --profile web-release --target wasm32-unknown-unknown
 ```
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every pull request, on pushes to `main` and in the merge queue:
+
+- **Format, lint, licences:** typos, `cargo fmt`, Clippy for native and `wasm32-unknown-unknown`, `cargo doc` with warnings as errors, `cargo deny` and `cargo machete`.
+- **Build and test:** builds the workspace and runs nextest and doc tests on Linux, Windows and macOS, on both x86_64 and aarch64.
+- **Docs:** builds this site.
+- **Mutation tests:** runs `cargo mutants` across the workspace and uploads the report.
+
+## Releases
+
+`.github/workflows/release.yml` runs when a `v*` tag is pushed. For now it only builds this site and deploys it to GitHub Pages at `https://moveranda.github.io/phrust/`. Engine binaries are not released yet.
+
+```sh
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+GitHub Pages must be set to deploy from **GitHub Actions** in the repository settings.

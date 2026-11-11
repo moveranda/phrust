@@ -1,0 +1,23 @@
+# https://github.com/crate-ci/typos/blob/master/docs/reference.md
+
+[files]
+extend-exclude = [
+    "**/.bin/",
+    "**/target/",
+    "**/dist/",
+    "**/node_modules/",
+    "**/.astro/",
+    "*.lock",
+    "pnpm-lock.yaml",
+]
+
+[default]
+extend-ignore-re = [
+    # Let intentional fixtures opt out between matching comments.
+    "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on",
+]
+
+# Physics and graphics vocabulary goes here as the engine grows.
+[default.extend-words]
+
+[default.extend-identifiers]
