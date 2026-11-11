@@ -1,40 +1,40 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Phrust
+description: An experimental game and physics engine written in Rust, rendered with WebGPU.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
+  tagline: An experimental game and physics engine written in Rust, rendered with WebGPU.
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get started
+      link: /guides/getting-started/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: View on GitHub
+      link: https://github.com/moveranda/phrust
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+:::caution[Early days]
+Phrust is at the foundations stage. The workspace, tooling and docs are in place, but there is no engine code yet.
+:::
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+## What Phrust is
+
+Phrust is a learning project. The physics follows *University Physics with Modern Physics* (Young & Freedman), and each chapter is turned into engine code with tests and runnable examples. Rendering uses WebGPU, so the same code targets native desktops and the browser (`wasm32-unknown-unknown`).
+
+<CardGrid>
+	<Card title="Rust workspace" icon="seti:rust">
+		A Cargo workspace in `src/`, with strict lints, a pinned toolchain and pinned dev tools.
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Platform layer" icon="laptop">
+		`phrust_linux` is the start of the Linux (Wayland) platform layer.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="WebGPU everywhere" icon="rocket">
+		Native and browser builds share one renderer. The `web-release` profile keeps wasm binaries small.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Dual licensed" icon="approve-check">
+		Available under either MIT or Apache-2.0, at your option.
 	</Card>
 </CardGrid>
