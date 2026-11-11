@@ -56,6 +56,11 @@ cargo build --profile web-release --target wasm32-unknown-unknown
 - **Docs:** builds this site.
 - **Mutation tests:** runs `cargo mutants` across the workspace and uploads the report.
 
+### Security scanning and dependency updates
+
+- `.github/workflows/codeql.yml` runs CodeQL on pull requests, pushes to `main` and weekly, for the Rust code, the docs site and the workflows. Findings appear under **Security → Code scanning**.
+- `.github/dependabot.yml` checks Cargo crates, the docs' npm packages and GitHub Actions every Monday. All updates, including major versions and security fixes, are grouped into one pull request per ecosystem.
+
 ## Releases
 
 `.github/workflows/release.yml` runs when a `v*` tag is pushed:
