@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
+  # The main-branch ruleset requires CodeQL results, and the merge queue
+  # waits for them on its own merge-group commit.
+  merge_group:
   schedule:
     # Weekly, so new CodeQL queries also run against unchanged code.
     - cron: "17 3 * * 1"
