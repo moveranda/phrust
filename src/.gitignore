@@ -26,6 +26,5 @@ rustc-ice-*.txt
 # Project tools installed by cargo-run-bin
 .bin/
 
-# Clippy report for SonarQube Cloud
-clippy-report.json
+# Coverage report from cargo llvm-cov --lcov
 lcov.info

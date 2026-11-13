@@ -62,7 +62,6 @@ cargo build --profile web-release --target wasm32-unknown-unknown
 - `.github/workflows/codeql.yml` runs CodeQL on pull requests, pushes to `main` and weekly, for the Rust code, the docs site and the workflows. Findings appear under **Security → Code scanning**.
 - `.github/workflows/osv-scanner.yml` checks `src/Cargo.lock` and `docs/pnpm-lock.yaml` against [osv.dev](https://osv.dev). On pull requests it fails only on vulnerabilities the change introduces.
 - `.github/workflows/scorecard.yml` runs [OpenSSF Scorecard](https://scorecard.dev) weekly and on pushes to `main`, rating the repository's supply-chain practices.
-- `.github/workflows/sonarqube.yml` runs [SonarQube Cloud](https://sonarcloud.io) on pull requests and `main`, with the Clippy report imported. Settings live in `sonar-project.properties`, and it needs the `SONAR_TOKEN` repository secret.
 - `.github/dependabot.yml` checks Cargo crates, the docs' npm packages and GitHub Actions every Monday. All updates, including major versions and security fixes, are grouped into one pull request per ecosystem.
 
 ## Releases
