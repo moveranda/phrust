@@ -8,17 +8,9 @@ authors.workspace = true
 repository.workspace = true
 
 [target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
-wayland-backend = { workspace = true, features = [
-    "client_system",
-    "dlopen",
-], optional = true }
-
-wayland-client = { workspace = true, optional = true }
-
-wayland-protocols = { workspace = true, features = [
-    "client",
-    "unstable",
-], optional = true }
+wayland-client = "0.31.15"                                         # the protocol, core objects
+wayland-protocols = { version = "0.32.13", features = ["client"] } # xdg-shell: desktop windows
+rustix = { version = "1.1.6", features = ["fs"] }                  # memfd_create for pixel memory
 
 [lints]
 workspace = true

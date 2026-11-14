@@ -1,0 +1,9 @@
+# Taplo (Even Better TOML) formatter config: https://taplo.tamasfe.dev/configuration/formatter-options.html
+# A copy lives in src/ so the formatter finds it whether VS Code opens the repo root, src/, or the workspace file.
+
+[formatting]
+column_width = 120
+indent_string = "    "
+reorder_keys = false
+array_auto_expand = true
+array_auto_collapse = true
