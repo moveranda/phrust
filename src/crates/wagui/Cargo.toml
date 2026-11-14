@@ -15,6 +15,17 @@ path = "src/wagui.rs"
 default = ["wayland"]
 wayland = []
 
+[dependencies]
+#
+# Workspace member crates
+#
+
+#
+# External dependencies
+#
+
+bitflags.workspace = true
+
 [dev-dependencies]
 #
 # Workspace member crates

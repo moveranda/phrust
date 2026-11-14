@@ -24,6 +24,8 @@ wagui = { path = "crates/wagui", default-features = false }
 # External dependencies
 #
 
+bitflags = "2.6.0"
+
 [workspace.lints.rust]
 missing_docs = "warn"
 unsafe_code = "deny"
