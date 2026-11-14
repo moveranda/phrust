@@ -1,0 +1,45 @@
+[package]
+name = "wagui_platform"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[lib]
+path = "src/wagui_platform.rs"
+doctest = false
+
+
+[features]
+default = []
+wayland = ["wagui_linux/wayland"]
+
+[dependencies]
+
+#
+# Workspace member crates
+#
+
+wagui.workspace = true
+
+#
+# External dependencies
+#
+
+[dev-dependencies]
+
+#
+# Workspace member crates
+#
+
+[target.'cfg(all(any(target_os = "linux", target_os = "freebsd"), not(target_env = "ohos")))'.dependencies]
+wagui_linux.workspace = true
+
+#
+# External dependencies
+#
+
+[lints]
+workspace = true

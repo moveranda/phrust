@@ -1,5 +1,5 @@
 [package]
-name = "phrust_linux"
+name = "wagui_linux"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -7,10 +7,29 @@ license.workspace = true
 authors.workspace = true
 repository.workspace = true
 
+[lib]
+path = "src/wagui_linux.rs"
+doctest = false
+
+[features]
+default = ["wayland"]
+wayland = ["wagui/wayland", "dep:wayland-client", "dep:wayland-protocols", "dep:rustix"]
+
 [target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
-wayland-client = "0.31.15"                                         # the protocol, core objects
-wayland-protocols = { version = "0.32.13", features = ["client"] } # xdg-shell: desktop windows
-rustix = { version = "1.1.6", features = ["fs"] }                  # memfd_create for pixel memory
+#
+# Workspace member crates
+#
+
+wagui.workspace = true
+
+
+#
+# External dependencies
+#
+
+wayland-client = { version = "0.31.11", optional = true }                           # the protocol, core objects
+wayland-protocols = { version = "0.32.13", features = ["client"], optional = true } # xdg-shell: desktop windows
+rustix = { version = "1.1.6", features = ["fs"], optional = true }                  # memfd_create for pixel memory
 
 [lints]
 workspace = true
