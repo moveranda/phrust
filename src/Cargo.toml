@@ -11,18 +11,9 @@ authors = ["Victor Pogor"]
 repository = "https://github.com/moveranda/phrust"
 
 [workspace.dependencies]
-
-#
-# Workspace member crates
-#
-
 wagui_linux = { path = "crates/wagui_linux", default-features = false }
 wagui_platform = { path = "crates/wagui_platform", default-features = false }
 wagui = { path = "crates/wagui", default-features = false }
-
-#
-# External dependencies
-#
 
 bitflags = "2.6.0"
 
@@ -72,7 +63,6 @@ strip = false
 # ---------------------------------------------------------------------------
 # Project tools, run through cargo-run-bin (see .cargo/config.toml).
 # ---------------------------------------------------------------------------
-
 [workspace.metadata.bin]
 cargo-deny = { version = "0.20.2", locked = true }
 cargo-llvm-cov = { version = "0.9.1", locked = true }

@@ -16,26 +16,10 @@ default = ["wayland"]
 wayland = []
 
 [dependencies]
-#
-# Workspace member crates
-#
-
-#
-# External dependencies
-#
-
 bitflags.workspace = true
 
 [dev-dependencies]
-#
-# Workspace member crates
-#
-
 wagui_platform = { workspace = true, features = ["wayland"] }
-
-#
-# External dependencies
-#
 
 [[example]]
 name = "blank_window"
